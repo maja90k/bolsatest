@@ -1,2 +1,6 @@
+#dependencies
 /node_modules
-
+/.pnp
+#misc
+.env
+.env.local
