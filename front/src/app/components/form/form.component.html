@@ -1,0 +1,73 @@
+<div class="container-fluid m-0 p-0">
+    <app-nav></app-nav>
+    <br>
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+        aria-controls="offcanvasScrolling">Ingresar Nemos</button>
+
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+        id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Nemos</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <p>CARGAR LA DATA.</p>
+        </div>
+    </div>
+
+    <div class="container p-5">
+        <div class="row p-5 justify-content-center">
+            <div class="col-md-12 ms-5">
+                <div class="mb">
+                    <h1>Precios</h1>
+                    <hr>
+                </div>
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="autos.length > 0">
+                        <tr *ngFor="let auto of autos">
+                            <td>{{ auto.id }}</td>
+                            <td>{{ auto.marca }}</td>
+                            <td>{{ auto.modelo }}</td>
+                            <td>{{ auto.fecha_ingreso | date:'mediumDate' }}</td>
+                            <td>
+                                <div class="col-lg-5 col-md-6 col-12">
+                                    <div class="mb-3">
+                                        <button type="button" class="btn btn-danger"
+                                            (click)="eliminarAuto(auto.id)">Eliminar</button>
+                                    </div>
+                                    <div class="mb-3">
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">Editar</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                    <tbody *ngIf="autos.length <= 0">
+                        <td colspan="3" class="text-center py-2">No hay precios para mostrar.</td>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-12 ms-5">
+                <div class="mb">
+                    <h1>Grafica</h1>
+                    <hr>
+                </div>
+                <tbody *ngIf="autos.length <= 0">
+                    <td colspan="3" class="text-center py-2">No hay datos para mostrar.</td>
+                </tbody>
+            </div>
+        </div>
+    </div>
+</div>

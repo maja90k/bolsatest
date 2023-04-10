@@ -25,10 +25,6 @@ const getData =  (req, res) => {
 }
 
 
-
-
-
-
 module.exports = {
   //exportamos funciones
   getData,
