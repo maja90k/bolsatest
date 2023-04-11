@@ -1,8 +1,10 @@
 const express = require('express')
 const fs = require('fs');
-
+const cors = require('cors')
 const app = express()
 const port = 9090
+
+app.use(cors());
 
 //GET - /api/symbols/
 app.get('/api/symbols', (req, res) => {
@@ -33,7 +35,7 @@ app.get('/api/historical', (req, res) => {
     const rawdata = fs.readFileSync('data/historical.json')
     const symbolsdata = JSON.parse(rawdata)
 
-    res.send(JSON.stringify(symbolsdata))
+    res.json(symbolsdata)
 })
 
 // /api/historical/<symbol>
@@ -51,6 +53,7 @@ app.get('/api/historical/:symbol', (req, res) => {
 
     res.json(symbolfilter)
 })
+
 
 
 app.listen(port, () => {

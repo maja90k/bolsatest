@@ -1,6 +1,12 @@
-export interface Auto {
-  id: number;
-  marca: string;
-  modelo: string;
-  fecha_ingreso:  string | Date ;
+export interface Symbol {
+  symbol: string;
+  name: string;
+  price: string;
+}
+export interface SymbolHistorical{
+  symbol: string
+  historical:{
+    date: Date
+    close: Number
+  }
 }

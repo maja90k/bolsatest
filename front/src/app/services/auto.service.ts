@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Auto } from '../models/interfaces';
+import { Symbol, SymbolHistorical } from '../models/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -9,35 +9,48 @@ import { Auto } from '../models/interfaces';
 export class AutoService {
 
   endpoint = environment.endpoint
-  auto : Auto = {
-    id: NaN,
-    marca: '',
-    modelo: '',
-    fecha_ingreso: '',
+
+  symbol: Symbol = {
+    symbol: '',
+    name: '',
+    price: '',
   }
+
+
+  //symbolByHistorical: SymbolHistorical
+
+
+
 
   constructor(private http: HttpClient) { }
 
-  async saveAuto(auto: any) {
-    try {
-      const res = this.http.post(`${this.endpoint}/reqPost`, auto).toPromise();
-      alert('Se agregó el auto con exito.');
-      return res
-    } catch (e) {
-      return e
-    }
+  //GET symbols
+
+  getAllSymbols() {
+    return this.http.get(`${this.endpoint}/symbols`);
+  }
+  //GET symbols/<symbols>
+
+  getSymbolsBySymbol(symbol: any) {
+    const res = this.http.get(`${this.endpoint}/symbols/`,symbol);
+    console.log(res)
+    return res;
   }
 
-  getAll() {
-    return this.http.get(`${this.endpoint}/getAll`);
+  //GET historical
+  getAllHistorical() {
+    return this.http.get(`${this.endpoint}/historical`);
   }
 
-  deleteAuto(id: any) {
-    return this.http.delete(`${this.endpoint}/reqPost/${id}`);
+  //GET historical/<symbols>
+  getHistoricalBySymbol(symbolObj: any) {
+    return this.http.get(`${this.endpoint}/historical`,);
   }
 
-  editarAuto(auto : Auto) {
-    return this.http.put(`${this.endpoint}/reqPost/`,auto);
-  }
+
+
+
+
+
 
 }
