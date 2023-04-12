@@ -1,12 +1,13 @@
 export interface Symbol {
   symbol: string;
   name: string;
-  price: string;
+  price: number;
 }
-export interface SymbolHistorical{
+
+export interface SymbolHistorical {
   symbol: string
-  historical:{
+  historical: {
     date: string | Date
-    close: Number
+    close: number
   }
 }

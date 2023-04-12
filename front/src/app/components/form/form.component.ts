@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Symbol, SymbolHistorical } from 'src/app/models/interfaces';
-import { AutoService } from 'src/app/services/auto.service';
+import { SymbolService as SymbolService } from 'src/app/services/auto.service';
+import Chart from 'chart.js/auto';
+
 
 @Component({
   selector: 'app-form',
@@ -9,24 +11,57 @@ import { AutoService } from 'src/app/services/auto.service';
 })
 export class FormComponent implements OnInit {
 
-  symbols: any = [];
-  //errores: any = [];
-  
-  // formAuto: Symbol = {
-  //   id: NaN,
-  //   marca: '',
-  //   modelo: '',
-  // }
+  nemotecnicosList: any = [];
+  historicalList: any = [];
 
-  constructor(private autoService: AutoService) { }
+  public chart: any;
+
+  constructor(private symbolService: SymbolService) { }
+
+  getAllNemotecnicos() {
+    return this.symbolService.getAllNemotecnicos()
+      .subscribe((data) => {
+        this.nemotecnicosList = data;
+      })
+  }
+
+  getSymbolByNemo(symbol: string) {
+    return this.symbolService.getHistoricalBySymbol(symbol)
+      .subscribe((data) => {
+        this.historicalList = data;
+      })
+  }
+
+  createChart(historical: any) {
+    console.log(historical);
+    this.chart = new Chart("MyChart", {
+      type: 'bar',
+
+      data: {
+        labels: historical.date,
+        datasets: [
+          {
+            label: "Price",
+            data: [historical.price],
+            backgroundColor: 'blue'
+          },
+        ]
+      },
+      options: {
+        aspectRatio: 2.5
+      }
+
+    });
+  }
 
 
-  getDataBySymbols() {
-    this.autoService.getAllSymbols().subscribe(symbol => this.symbols = symbol);
+  onClick(symbol: string) {
+    const list = this.getSymbolByNemo(symbol);
+    this.createChart(list);
   }
 
   ngOnInit() {
-    this.getDataBySymbols();
+    this.getAllNemotecnicos();
   }
 
 }

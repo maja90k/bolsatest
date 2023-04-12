@@ -2,35 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Symbol, SymbolHistorical } from '../models/interfaces';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AutoService {
+export class SymbolService {
 
   endpoint = environment.endpoint
-
-  symbol: Symbol = {
-    symbol: '',
-    name: '',
-    price: '',
-  }
-
-
-  // symbolByHis: SymbolHistorical = {
-  //   close: NaN,
-  //   date: '',
-  // }
-
 
 
   constructor(private http: HttpClient) { }
 
   //GET symbols
-  getAllSymbols() { 
-    const res = this.http.get(`${this.endpoint}/symbols`);
-    console.log(res + "xd");
-    return res
+  getAllNemotecnicos(): Observable<Symbol[]> { 
+    return this.http
+      .get<Symbol[]>(`${this.endpoint}/symbols`)
+      .pipe()
   }
   
   //GET symbols/<symbols>
@@ -46,14 +34,10 @@ export class AutoService {
   }
 
   //GET historical/<symbols>
-  getHistoricalBySymbol(symbolObj: any) {
-    return this.http.get(`${this.endpoint}/historical`,);
+  getHistoricalBySymbol(symbol: any): Observable<SymbolHistorical[]> {
+    return this.http
+      .get<SymbolHistorical[]>(`${this.endpoint}/historical/${symbol}`)
+      .pipe();
   }
-
-
-
-
-
-
 
 }

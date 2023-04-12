@@ -10,8 +10,12 @@
             <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Nemos</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <h1>xd</h1>
- 
+        <ul>
+            <li *ngFor="let symbol of nemotecnicosList.symbolsList" (click)="onClick(symbol.symbol);">
+                {{symbol.symbol}}
+            </li>
+        </ul>
+
     </div>
 
     <div class="container p-5">
@@ -21,31 +25,36 @@
                     <h1>Precios</h1>
                     <hr>
                 </div>
-                <table class="table">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Price</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody *ngIf="symbols.length > 0">
-                        <tr *ngFor="let symbol of symbols">
-                            <td>{{symbol.price}}</td>
-                            <td>{{symbol.date}}</td>
-                        </tr>
-                    </tbody> 
-                    <tbody *ngIf="symbols.length <= 0">
-                        <td colspan="3" class="text-center py-2">No hay precios para mostrar.</td>
-                    </tbody>
-                </table>
+                <div class="table-responsive" style="height: 300px;">
+                    <table class="table">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Price</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="historicalList.length > 0">
+                            <tr *ngFor="let historical of historicalList[0].historical">
+                                <td>{{historical.close}}</td>
+                                <td>{{historical.date}}</td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <td colspan="3" class="text-center py-2" *ngIf="historicalList.length == 0">No hay precios
+                                para mostrar.</td>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="col-md-12 ms-5">
                 <div class="mb">
                     <h1>Grafica</h1>
                     <hr>
                 </div>
-                <tbody *ngIf="symbols.length <= 0">
-                    <td colspan="3" class="text-center py-2">No hay datos para mostrar.</td>
+                <tbody>
+                    <canvas id="MyChart">{{ chart }}</canvas>
+                    <td colspan="3" class="text-center py-2" *ngIf="historicalList.length == 0">No hay datos para
+                        mostrar.</td>
                 </tbody>
             </div>
         </div>
