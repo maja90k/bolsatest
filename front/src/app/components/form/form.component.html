@@ -10,18 +10,9 @@
             <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Nemos</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <tbody *ngIf="symbols.length > 0">
-            <tr *ngFor="let symbol of symbols">
-                <td>{{ symbol.symbol}}</td>
-                <td>{{ symbol.name }}</td>
-            </tr>
-        </tbody>
-        <tbody *ngIf="symbols.length <= 0">
-            <td colspan="3" class="text-center py-2">No hay nemos para mostrar.</td>
-        </tbody>
+        <h1>xd</h1>
+ 
     </div>
-
-    
 
     <div class="container p-5">
         <div class="row p-5 justify-content-center">
@@ -34,14 +25,15 @@
                     <thead class="table-dark">
                         <tr>
                             <th>Price</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody *ngIf="symbols.length > 0">
                         <tr *ngFor="let symbol of symbols">
-                            <td>{{ symbol.price}}</td>
+                            <td>{{symbol.price}}</td>
+                            <td>{{symbol.date}}</td>
                         </tr>
                     </tbody> 
-                    
                     <tbody *ngIf="symbols.length <= 0">
                         <td colspan="3" class="text-center py-2">No hay precios para mostrar.</td>
                     </tbody>

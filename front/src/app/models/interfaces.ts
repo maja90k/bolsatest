@@ -6,7 +6,7 @@ export interface Symbol {
 export interface SymbolHistorical{
   symbol: string
   historical:{
-    date: Date
+    date: string | Date
     close: Number
   }
 }

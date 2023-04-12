@@ -17,25 +17,28 @@ export class AutoService {
   }
 
 
-  //symbolByHistorical: SymbolHistorical
-
+  // symbolByHis: SymbolHistorical = {
+  //   close: NaN,
+  //   date: '',
+  // }
 
 
 
   constructor(private http: HttpClient) { }
 
   //GET symbols
-
-  getAllSymbols() {
-    return this.http.get(`${this.endpoint}/symbols`);
+  getAllSymbols() { 
+    const res = this.http.get(`${this.endpoint}/symbols`);
+    console.log(res + "xd");
+    return res
   }
+  
   //GET symbols/<symbols>
-
-  getSymbolsBySymbol(symbol: any) {
-    const res = this.http.get(`${this.endpoint}/symbols/`,symbol);
-    console.log(res)
-    return res;
-  }
+  // getSymbolsBySymbol(symbol: any) {
+  //   const res = this.http.get(`${this.endpoint}/symbols/`, symbol);
+  //   console.log(res)
+  //   return res;
+  // }
 
   //GET historical
   getAllHistorical() {
